@@ -95,8 +95,8 @@ class _MyAppState extends State<MyApp> {
                 setState(() {});
               },
               selectedLabelStyle: TextStyle(color: Colors.white),
-              selectedItemColor: Colors.white,
-              backgroundColor: Colors.black45,
+              selectedItemColor: Colors.white,  
+              backgroundColor: Color.fromARGB(0, 61, 58, 58),
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(

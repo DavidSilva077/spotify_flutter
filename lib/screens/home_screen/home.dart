@@ -4,30 +4,34 @@ import 'package:sportify_clone/models/music.dart';
 import 'package:sportify_clone/services/category_service.dart';
 import 'package:sportify_clone/services/music_service.dart';
 
-
-
 class HomePage extends StatelessWidget {
   // const HomePage({Key? key}) : super(key: key);
   Function _miniPlayer;
   HomePage(this._miniPlayer);
 
   Widget createCategory(Category category) {
-    return Container(
-      color: Colors.blueGrey.shade400,
-      child: Row(
-        children: [
-          Image.network(
-            category.imageURL,
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Text(category.name,
-                style: TextStyle(
-                  color: Colors.white,
-                )),
-          )
-        ],
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Container(
+        color: Color.fromARGB(255, 46, 47, 51),
+        child: Row(
+          children: [
+            Image.network(
+              category.imageURL,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(category.name,
+                  style: TextStyle(color: Colors.white,
+                  fontFamily: "Raleway",
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold
+                  )),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -52,7 +56,7 @@ class HomePage extends StatelessWidget {
             width: 200,
             child: InkWell(
               onTap: () {
-                _miniPlayer(music, stop:true);
+                _miniPlayer(music, stop: true);
               },
               child: Image.network(
                 music.image,
@@ -60,14 +64,26 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            music.name,
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            music.desc,
-            style: TextStyle(color: Colors.white),
-          )
+          SizedBox(height: 10,),
+          Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
+            Text(
+              music.name,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Raleway",
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 2,),
+            Text(
+              music.desc,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Raleway",
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal),
+            )
+          ])
         ],
       ),
     );
@@ -81,7 +97,10 @@ class HomePage extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontFamily: "Raleway",
+              fontSize: 22,
+              fontWeight: FontWeight.bold),
         ),
         Container(
           height: 300,
@@ -115,8 +134,16 @@ class HomePage extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
-      title: Text(message, style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),),
+      title: Text(
+        message,
+        style: TextStyle(
+            fontFamily: "Raleway", fontSize: 23, fontWeight: FontWeight.bold),
+      ),
       actions: [
+        Padding(
+            padding: EdgeInsets.only(right: 10), child: Icon(Icons.search)),
+            Padding(
+            padding: EdgeInsets.only(right: 10), child: Icon(Icons.settings)),
         Padding(
             padding: EdgeInsets.only(right: 10), child: Icon(Icons.settings))
       ],
@@ -130,19 +157,24 @@ class HomePage extends StatelessWidget {
           child: Container(
         child: Column(
           children: [
-            SizedBox(height: 23,),
+            SizedBox(
+              height: 23,
+            ),
             createAppBar('Good evening'),
             createGrid(),
             createMusicList("Podcasts for you"),
             createMusicList("Made for you"),
           ],
         ),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.blueGrey.shade300, Colors.black],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.1, 0.3])),
+        // decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //         colors: [
+        //           Colors.blueGrey.shade300,
+        //           Colors.black,
+        //         ],
+        //         begin: Alignment.topLeft,
+        //         end: Alignment.bottomRight,
+        //         stops: [0.1, 0.3])),
       )),
     );
   }
